@@ -8,11 +8,12 @@ import com.jjh.pokeapp2.utils.extensions.configureStatusBarColor
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
+    var currentDayNight: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        currentDayNight = AppCompatDelegate.getDefaultNightMode()
         dark_mode_radio.check(R.id.follow_system_radio_button)
         dark_mode_radio.setOnCheckedChangeListener { _, id ->
             when (id) {
@@ -29,4 +30,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        if (currentDayNight != AppCompatDelegate.getDefaultNightMode()) {
+            recreate()
+        }
+    }
+
 }

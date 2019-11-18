@@ -31,10 +31,12 @@ class LoginActivity : AppCompatActivity() {
         val modeType = getDefaultNightMode()
         if (modeType == MODE_NIGHT_YES) {
             configureStatusBarColor(R.color.light_black, false)
-            animacionNoche()
+            switchDarkMode.setNight(true)
+            switchDark.isChecked = true
         } else {
             configureStatusBarColor(R.color.blanco_oscuro, true)
-            //switchDarkMode.setNight(false)
+            switchDarkMode.setNight(false)
+            switchDark.isChecked = false
         }
         //configureStatusBarColor(R.color.blanco_oscuro, true)
         logoPoke.setBackground(R.drawable.pokemon_icon)
@@ -48,10 +50,13 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this@LoginActivity, isNight.toString(), Toast.LENGTH_SHORT)
                         .show()
                     configureStatusBarColor(R.color.light_black, false)
+                    modeDark("NIGHT_YES")
+
                 } else {
                     Toast.makeText(this@LoginActivity, isNight.toString(), Toast.LENGTH_SHORT)
                         .show()
                     configureStatusBarColor(R.color.blanco_oscuro, true)
+                    modeDark("NIGHT_NO")
                 }
             }
         })
@@ -81,20 +86,23 @@ class LoginActivity : AppCompatActivity() {
         boton.setOnClickListener {
             //animacionNoche()
         }
-        botonDark.setOnClickListener {
-            if (botonDark.isChecked) {
-                animacionNoche()
-            } else {
-                animacionDia()
-            }
-        }
+
     }
 
     fun modeDark(mode: String) {
         when (mode) {
-            "NIGHT_NO" -> setDefaultNightMode(MODE_NIGHT_NO)
-            "NIGHT_YES" -> setDefaultNightMode(MODE_NIGHT_YES)
-            "SYSTEM" -> setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
+            "NIGHT_NO" -> {
+                setDefaultNightMode(MODE_NIGHT_NO)
+                delegate.applyDayNight()
+            }
+            "NIGHT_YES" -> {
+                setDefaultNightMode(MODE_NIGHT_YES)
+                delegate.applyDayNight()
+            }
+            "SYSTEM" -> {
+                setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
+                delegate.applyDayNight()
+            }
         }
     }
 
@@ -117,6 +125,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onAnimationEnd(animator: Animator) {
                 imgDia.translationX = switch2.width / 2f
             }
+
             override fun onAnimationCancel(animator: Animator) {}
             override fun onAnimationRepeat(animator: Animator) {}
         })
@@ -139,15 +148,16 @@ class LoginActivity : AppCompatActivity() {
             PropertyValuesHolder.ofFloat(View.TRANSLATION_X, switch2.width / 2f, 0f)
 
         val valueAnimator =
-        ObjectAnimator.ofPropertyValuesHolder(imgDia, rotation, translationX)
+            ObjectAnimator.ofPropertyValuesHolder(imgDia, rotation, translationX)
         ObjectAnimator.ofArgb(Color.parseColor("#353535"), Color.parseColor("#dadada"))
         valueAnimator.duration = 400
         valueAnimator.start()
         valueAnimator.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animator: Animator) {}
             override fun onAnimationEnd(animator: Animator) {
-             imgDia.translationX = 0f
+                imgDia.translationX = 0f
             }
+
             override fun onAnimationCancel(animator: Animator) {}
             override fun onAnimationRepeat(animator: Animator) {}
         })

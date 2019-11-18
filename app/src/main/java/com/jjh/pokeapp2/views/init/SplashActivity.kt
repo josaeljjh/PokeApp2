@@ -6,7 +6,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.jjh.pokeapp2.R
 import com.jjh.pokeapp2.views.welcome.login.LoginActivity
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class SplashActivity : AppCompatActivity() {
@@ -16,12 +19,11 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.splash)
 
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main).launch {
             delay(1000)
-            withContext(Dispatchers.Main) {
-                goToMainActivity()
-            }
+            goToMainActivity()
         }
+
     }
 
     private fun goToMainActivity() {

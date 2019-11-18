@@ -169,18 +169,12 @@
                         android:src="@drawable/day_icon" />
                 </androidx.cardview.widget.CardView>
 
-                <ToggleButton
-                    android:id="@+id/botonDark"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:background="@android:color/transparent"
-                    android:checked="false"
-                    android:text=""
-                    android:textOff=""
-                    android:textOn=""
-                    >
+               <Switch
+                   android:id="@+id/switchDark"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   />
 
-                </ToggleButton>
             </RelativeLayout>
 
         </LinearLayout>
