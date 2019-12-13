@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/loginFragment"
+    >
+
+    <action
+        android:id="@+id/action_mainFragment_to_viewEquipo"
+        app:destination="@id/equipoFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        app:launchSingleTop="true"
+        app:popUpTo="@+id/main_navigation"
+        app:popUpToInclusive="true"
+        />
+
+    <action
+        android:id="@+id/action_mainFragment_to_viewRegion"
+        app:destination="@id/homeFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:launchSingleTop="true"
+        app:popUpTo="@+id/main_navigation"
+        app:popUpToInclusive="true"
+        />
+
+    <action
+        android:id="@+id/action_mainFragment_to_viewLogin"
+        app:destination="@id/loginFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:launchSingleTop="true"
+        app:popUpTo="@+id/main_navigation"
+        app:popUpToInclusive="true"
+        />
+
+    <!-- LoginFragment -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.jjh.pokeapp2.views.welcome.login.LoginFragment"
+        android:label="fragment_view_transaction"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_mainFragment_to_viewHomeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/main_navigation"
+            app:popUpToInclusive="true"
+            />
+
+    </fragment>
+
+    <!-- HomeFragment -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.jjh.pokeapp2.views.welcome.home.HomeFragment"
+        android:label="fragment_view_transaction"
+        tools:layout="@layout/fragment_home"
+        >
+
+        <action
+            android:id="@+id/action_mainFragment_to_viewLoginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/main_navigation"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+
+    <!-- HomeFragment -->
+    <fragment
+        android:id="@+id/equipoFragment"
+        android:name="com.jjh.pokeapp2.views.welcome.equipo.EquipoFragment"
+        android:label="fragment_view_transaction"
+        tools:layout="@layout/fragment_equipo">
+
+    </fragment>
+</navigation>

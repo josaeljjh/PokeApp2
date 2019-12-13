@@ -4,8 +4,6 @@ import android.Manifest
 
 class DataTempStatic {
 
-
-
     companion object {
         var isSesion = false
         var reloadRegister = false

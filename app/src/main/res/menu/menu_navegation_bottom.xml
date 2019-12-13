@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_navigation"
+    >
+
+    <item
+        android:id="@+id/bottomRegion"
+        android:icon="@drawable/ic_map"
+        android:title="@string/region"
+        />
+
+    <!--<item
+        android:id="@+id/bottomPokemon"
+        android:icon="@drawable/ic_poke"
+        android:title="Pokémon"
+        />-->
+
+    <item
+        android:id="@+id/bottomEquipo"
+        android:icon="@drawable/ic_pokeballs"
+        android:title="@string/equipos"
+        />
+
+    <item
+        android:id="@+id/bottomCerrar"
+        android:icon="@drawable/ic_account"
+        android:title="@string/cerrar_sesion"/>
+</menu>

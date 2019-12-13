@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.welcome.login.LoginFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blanco"
+        >
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+
+
+            <ImageView
+                android:id="@+id/logoPoke"
+                android:layout_width="@dimen/_270sdp"
+                android:layout_height="@dimen/_110sdp"
+                android:scaleType="centerInside"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/logoUser"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:scaleType="centerInside"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/texto"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:gravity="center"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/bienvenido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/bienvenido"
+                    android:textColor="@color/negro_dark"
+                    android:textSize="@dimen/_16sdp" />
+
+                <TextView
+                    android:id="@+id/registrate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_minus3sdp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/textlogin"
+                    android:textColor="@color/gris"
+                    android:textSize="@dimen/_11sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnFirebase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/btnFacebook"
+                    android:layout_width="@dimen/_205sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingTop="@dimen/_11sdp"
+                    android:paddingBottom="@dimen/_11sdp"
+                    android:visibility="gone"
+                    tools:ignore="RtlSymmetry" />
+
+                <Button
+                    android:id="@+id/btnFacebookCust"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_37sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/corner_shape_face"
+                    android:drawableStart="@drawable/ic_facebook"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:text="@string/iniciar_sesi_n_con_facebook"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorBlanco"
+                    android:textSize="@dimen/_11sdp"
+                    tools:ignore="RtlSymmetry" />
+
+                <Button
+                    android:id="@+id/btnGoogle"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_37sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@drawable/corner_shape_google"
+                    android:drawableStart="@drawable/ic_google"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:text="@string/iniciar_sesi_n_con_google"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorBlanco"
+                    android:textSize="@dimen/_11sdp"
+                    tools:ignore="RtlSymmetry" />
+
+                <LinearLayout
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    >
+
+                    <TextView
+                        android:id="@+id/txtDarkMode"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/modo_oscuro"
+                        android:textColor="@color/negro_dark"
+                        android:textSize="@dimen/_14sdp" />
+
+                    <ToggleButton
+                        android:id="@+id/switchDark"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:background="@drawable/selector_dark"
+                        android:textOff=""
+                        android:textOn=""
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

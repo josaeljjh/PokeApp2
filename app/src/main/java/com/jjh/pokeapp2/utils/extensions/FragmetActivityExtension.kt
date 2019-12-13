@@ -4,7 +4,9 @@ package com.jjh.pokeapp2.utils.extensions
 import android.os.Build
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
+import com.bancohipotecario.app.core.util.BottomDialogFragment
 import com.jjh.pokeapp2.R
 
 //Activity StatusBarColor
@@ -37,4 +39,30 @@ fun FragmentActivity.getVersionApp(): String {
     } catch (e: Exception) {
     }
     return ""
+}
+
+fun FragmentActivity.configureDialogFragment(dialog: Any,
+                                             isBottomSheet: Boolean = true,
+                                             cancelable: Boolean = false) {
+    val receivedDialog = if (isBottomSheet) dialog as BottomDialogFragment else dialog as DialogFragment
+    receivedDialog.setStyle(
+        DialogFragment.STYLE_NO_TITLE,
+        if (isBottomSheet) {
+            R.style.BottomSheetDialog
+        } else {
+            android.R.style.Theme_Black_NoTitleBar_Fullscreen
+        }
+    )
+    receivedDialog.isCancelable = cancelable
+    receivedDialog.show(supportFragmentManager, "")
+}
+
+fun FragmentActivity.loading():BottomDialogFragment{
+   val mBottomSheetDialog = BottomDialogFragment(
+        R.layout.sheet_dialog,
+        fun(_) {
+            //view.Title.text = "Qué servicio programarás"
+        })
+     configureDialogFragment(mBottomSheetDialog, true, cancelable = false)
+    return mBottomSheetDialog
 }

@@ -6,7 +6,8 @@ import android.content.Context
 import androidx.multidex.MultiDex
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
-import com.jjh.pokeapp2.di.module.networkModule
+import com.jjh.pokeapp2.di.module.repositoryModule
+import com.jjh.pokeapp2.di.module.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -22,8 +23,6 @@ class App:Application() {
 
     }
 
-
-
     override fun onCreate() {
         super.onCreate()
         instance = this
@@ -32,7 +31,7 @@ class App:Application() {
             androidLogger()
             androidContext(this@App)
             // load modules here
-            modules(networkModule.networkModule)
+            modules(listOf(repositoryModule, viewModelModule))
         }
 
         //inicializacion sdk facebook
@@ -45,5 +44,4 @@ class App:Application() {
         super.attachBaseContext(base)
         MultiDex.install(this)
     }
-
 }

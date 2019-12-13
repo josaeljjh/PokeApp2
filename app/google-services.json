@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1051656031945",
+    "firebase_url": "https://pokeapp2.firebaseio.com",
+    "project_id": "pokeapp2",
+    "storage_bucket": "pokeapp2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051656031945:android:59143e682dfbdae14a8718",
+        "android_client_info": {
+          "package_name": "com.jjh.pokeapp2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051656031945-gtselp84ksia028dhh3bdns4vm2jgdjr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jjh.pokeapp2",
+            "certificate_hash": "3140dc9f1102a9aa6cec621202863a8d26a6088a"
+          }
+        },
+        {
+          "client_id": "1051656031945-9hn3okg8r6egcuqcop6n4gis3ndccvf5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRAvkHTRkIW8drlkbBu2q6jPaR3T3TUC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051656031945-9hn3okg8r6egcuqcop6n4gis3ndccvf5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

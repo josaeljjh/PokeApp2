@@ -5,7 +5,7 @@ import tgio.rncryptor.RNCryptorNative
 
 object Crypto {
     var rncryptor = RNCryptorNative()
-    const val DATA_SHEME = "RGlpbW9BcHA="
+    const val DATA_SHEME = "ampoLnBva2VhcHA="
 
     fun encryptNat(src: String): String {
         return String(rncryptor.encrypt(src, decryptBase64(DATA_SHEME)))
