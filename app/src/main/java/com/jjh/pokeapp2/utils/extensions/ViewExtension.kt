@@ -1,18 +1,24 @@
 package com.jjh.pokeapp2.utils.extensions
 
 import android.graphics.Typeface
+import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.util.TypedValue
 import android.view.View
+import android.view.WindowInsets
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.updatePadding
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.google.android.material.snackbar.Snackbar
 import com.jjh.pokeapp2.R
 import com.jjh.pokeapp2.utils.CustomTypefaceSpan
+import com.jjh.pokeapp2.utils.SafeClickListener
 
 fun View?.snackbarConexion(mensaje: String) {
     val snackbar = Snackbar.make(this!!, mensaje, Snackbar.LENGTH_LONG)
@@ -63,3 +69,92 @@ fun BottomNavigationView?.configBottom() {
         iconView.layoutParams = layoutParams
     }
 }
+
+fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {
+    val safeClickListener = SafeClickListener { view ->
+        onSafeClick(view)
+    }
+    setOnClickListener(safeClickListener)
+}
+
+//View Visibility
+fun View.makeVisible() {
+    visibility = View.VISIBLE
+}
+
+fun View.makeInvisible() {
+    visibility = View.INVISIBLE
+}
+
+fun View.makeGone() {
+    visibility = View.GONE
+}
+
+//navigations
+fun View.gotoSpecificFragmentClear(action: Int){
+    Navigation.findNavController(this)
+        .navigate(action,
+            null,
+            NavOptions.Builder()
+                .setPopUpTo(action,
+                    true).build())
+}
+
+fun View.gotoNavigate(action: Int, arg: Bundle? = null) {
+    Navigation.findNavController(this)
+        .navigate(action, arg)
+}
+fun View.gotoBack() {
+    Navigation.findNavController(this).popBackStack()
+}
+
+fun View.marginUpdate() {
+    systemUiVisibility =
+        View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+    setPadding(0, 0, 0, 0)
+    doOnApplyWindowInsets { view, insets, padding ->
+        view.updatePadding(bottom = padding.bottom)
+        //insets
+    }
+}
+
+fun View.doOnApplyWindowInsets(f: (View, WindowInsets, InitialPadding) -> Unit) {
+    // Create a snapshot of the view's padding state
+    val initialPadding = recordInitialPaddingForView(this)
+    // Set an actual OnApplyWindowInsetsListener which proxies to the given
+    // lambda, also passing in the original padding state
+    setOnApplyWindowInsetsListener { v, insets ->
+        f(v, insets, initialPadding)
+        // Always return the insets, so that children can also use them
+        insets
+    }
+    // request some insets
+    requestApplyInsetsWhenAttached()
+}
+
+fun View.requestApplyInsetsWhenAttached() {
+    if (isAttachedToWindow) {
+        // We're already attached, just request as normal
+        requestApplyInsets()
+    } else {
+        // We're not attached to the hierarchy, add a listener to
+        // request when we are
+        addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+            override fun onViewAttachedToWindow(v: View) {
+                v.removeOnAttachStateChangeListener(this)
+                v.requestApplyInsets()
+            }
+
+            override fun onViewDetachedFromWindow(v: View) = Unit
+        })
+    }
+}
+
+private fun recordInitialPaddingForView(view: View) = InitialPadding(
+    view.paddingLeft, view.paddingTop, view.paddingRight, view.paddingBottom
+)
+
+data class InitialPadding(
+    val left: Int, val top: Int,
+    val right: Int, val bottom: Int
+)

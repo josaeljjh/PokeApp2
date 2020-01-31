@@ -1,4 +1,4 @@
-package com.jjh.pokeapp2.views.welcome.login
+package com.jjh.pokeapp2.views.home.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,17 +16,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.jjh.pokeapp2.R
-import com.jjh.pokeapp2.di.repository.FirebaseRepository
+import com.jjh.pokeapp2.interfaces.InterfaceGlobal
+import com.jjh.pokeapp2.repository.FirebaseRepository
 import com.jjh.pokeapp2.utils.Cons
-import com.jjh.pokeapp2.utils.Cons.sheetDialog
 import com.jjh.pokeapp2.utils.extensions.*
-import com.jjh.pokeapp2.views.welcome.home.MainActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.jjh.pokeapp2.views.home.HomeHost
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(){
 
     lateinit var navController: NavController
     private lateinit var googleApiClient: GoogleSignInClient
@@ -34,6 +33,8 @@ class LoginFragment : Fragment() {
     private var callbackManager: CallbackManager? = null
     private val viewModel by viewModel<ViewModelLogin>()
     private val firebase: FirebaseRepository by inject()
+    private var main: InterfaceGlobal.mainGlobal = HomeHost()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,14 +57,22 @@ class LoginFragment : Fragment() {
     }
 
     private fun config() {
-        //switchDark.isChecked = activity?.getBooleanPreference(Cons.IS_NIGHT)?: false
-        (activity as MainActivity).bottomNavigationBar.visibility = View.GONE
+        Cons.activity = activity
+        switchDark.isChecked = activity?.getBooleanPreference(Cons.IS_NIGHT) as Boolean
+        main.hideBottomNavigation()
         logoPoke.setBackground(R.drawable.pokemon_icon)
         logoUser.setBackground(R.drawable.player)
         callbackManager = CallbackManager.Factory.create()
-        observerLoading()
         configureGoogle()
         sesion()
+
+       /* DataBindingUtil.setContentView<FragmentLoginBinding>(
+            activity!!,
+            R.layout.fragment_login
+        ).apply {
+            lifecycleOwner = this@LoginFragment
+            viewmodel = viewModel
+        }*/
     }
 
     private fun onClickListener() {
@@ -71,14 +80,14 @@ class LoginFragment : Fragment() {
 
         }
         btnGoogle.setOnClickListener {
-            sheetDialog = activity?.loading()
+            main.showLoading()
             startActivityResult()
         }
         switchDark.setOnClickListener {
             if (switchDark.isChecked) {
-                modeDark(Cons.NIGHT_YES)
-            } else {
                 modeDark(Cons.NIGHT_NO)
+            } else {
+                modeDark(Cons.NIGHT_YES)
             }
         }
     }
@@ -87,11 +96,11 @@ class LoginFragment : Fragment() {
         when (mode) {
             Cons.NIGHT_NO -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                activity?.setPreference(Cons.IS_NIGHT, false)
+                activity?.setPreference(Cons.IS_NIGHT, true)
             }
             Cons.NIGHT_YES -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                activity?.setPreference(Cons.IS_NIGHT, true)
+                activity?.setPreference(Cons.IS_NIGHT, false)
             }
             Cons.SYSTEM -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
@@ -125,7 +134,8 @@ class LoginFragment : Fragment() {
                 // Google Sign In was successful, authenticate with Firebase
                 viewModel.firebaseGoogle(result.signInAccount!!)
             } else {
-                btnGoogle.snackbar("Error.")
+                main.dismissLoading()
+                btnGoogle.snackbarConexion("Comprueba tu conexión.")
             }
         }
     }
@@ -164,20 +174,12 @@ class LoginFragment : Fragment() {
     }
 
     override fun onDestroy() {
+        main.dismissLoading()
         super.onDestroy()
-        sheetDialog.let { it?.dismiss() }
     }
 
     override fun onDestroyView() {
+        main.dismissLoading()
         super.onDestroyView()
-        sheetDialog.let { it?.dismiss() }
-    }
-
-    private fun observerLoading() {
-        viewModel.showLoading.observe(viewLifecycleOwner, Observer {
-            it?.let {
-              if (it) sheetDialog = activity?.loading() else sheetDialog.let {dialog -> dialog?.dismiss() }
-            }
-        })
     }
 }

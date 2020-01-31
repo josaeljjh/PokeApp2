@@ -1,12 +1,13 @@
 package com.jjh.pokeapp2.views.init
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.jjh.pokeapp2.R
-import com.jjh.pokeapp2.views.welcome.home.MainActivity
+import com.jjh.pokeapp2.utils.Cons
+import com.jjh.pokeapp2.utils.extensions.getBooleanPreference
+import com.jjh.pokeapp2.utils.extensions.launchActivity
+import com.jjh.pokeapp2.views.home.HomeHost
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -22,16 +23,21 @@ class SplashActivity : AppCompatActivity() {
         //println("url: "+ Crypto.encryptNat("https://pokeapi.co/api/v2/"))
         //println("url: "+ Crypto.decryptNat(BASE_URL_PROD))
         CoroutineScope(Dispatchers.Main).launch {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             delay(1000)
-            goToMainActivity()
+            launchActivity<HomeHost>(true)
         }
-
     }
 
-    private fun goToMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
-        overridePendingTransition(R.anim.slide_in_right, android.R.anim.fade_out)
-        finish()
+    private fun modeDark() {
+        if(getBooleanPreference(Cons.IS_NIGHT)){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+    }
+
+    override fun onStart() {
+        modeDark()
+        super.onStart()
     }
 }

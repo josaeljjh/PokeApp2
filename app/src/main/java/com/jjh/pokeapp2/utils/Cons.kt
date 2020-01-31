@@ -1,6 +1,7 @@
 package com.jjh.pokeapp2.utils
 
-import com.bancohipotecario.app.core.util.BottomDialogFragment
+import androidx.fragment.app.FragmentActivity
+import com.jjh.pokeapp2.utils.BottomDialogFragment
 
 object Cons {
 
@@ -17,10 +18,15 @@ object Cons {
     const val ISTEST = true
 
     var night = false
-    var IS_NIGHT= ""
+    var IS_NIGHT= "false"
     var NIGHT_NO= "NIGHT_NO"
     var NIGHT_YES = "NIGHT_YES"
     var SYSTEM = "SYSTEM"
 
     var sheetDialog: BottomDialogFragment? = null
+    var activity: FragmentActivity? = null
+
+    var region:String = ""
+    var idRegion:String = ""
+    var nombrePoke:String = ""
 }

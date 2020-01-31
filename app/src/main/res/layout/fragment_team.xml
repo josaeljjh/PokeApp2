@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blanco"
-    app:layoutDescription="@xml/motion_scene_collapsing_equipo"
-    tools:context=".views.welcome.equipo.EquipoFragment">
+    app:layoutDescription="@xml/motion_scene_collapsing_team"
+    tools:context=".views.home.team.TeamFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/header"
@@ -28,7 +28,7 @@
             android:layout_width="@dimen/_170sdp"
             android:layout_height="@dimen/_60sdp"
             android:scaleType="centerInside"
-            android:src="@drawable/pokemon_icon"
+            app:srcCompat="@drawable/pokemon_icon"
             android:layout_marginTop="@dimen/_25sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
             android:scaleType="centerInside"
-            android:src="@drawable/pokeballs"
+            app:srcCompat="@drawable/pokeballs"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logoPokeEquipo"
@@ -72,7 +72,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listEquipos"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"

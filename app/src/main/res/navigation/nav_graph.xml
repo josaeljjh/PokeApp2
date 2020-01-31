@@ -8,7 +8,7 @@
 
     <action
         android:id="@+id/action_mainFragment_to_viewEquipo"
-        app:destination="@id/equipoFragment"
+        app:destination="@id/teamFragment"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
@@ -42,10 +42,22 @@
         app:popUpToInclusive="true"
         />
 
+    <action
+        android:id="@+id/action_mainFragment_to_viewSelect"
+        app:destination="@id/selectFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        app:launchSingleTop="true"
+        app:popUpTo="@+id/main_navigation"
+        app:popUpToInclusive="true"
+        />
+
     <!-- LoginFragment -->
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.jjh.pokeapp2.views.welcome.login.LoginFragment"
+        android:name="com.jjh.pokeapp2.views.home.login.LoginFragment"
         android:label="fragment_view_transaction"
         tools:layout="@layout/fragment_login">
 
@@ -66,9 +78,9 @@
     <!-- HomeFragment -->
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.jjh.pokeapp2.views.welcome.home.HomeFragment"
+        android:name="com.jjh.pokeapp2.views.home.region.RegionFragment"
         android:label="fragment_view_transaction"
-        tools:layout="@layout/fragment_home"
+        tools:layout="@layout/fragment_region"
         >
 
         <action
@@ -84,12 +96,24 @@
             />
     </fragment>
 
-    <!-- HomeFragment -->
+    <!-- TeamFragment -->
     <fragment
-        android:id="@+id/equipoFragment"
-        android:name="com.jjh.pokeapp2.views.welcome.equipo.EquipoFragment"
+        android:id="@+id/teamFragment"
+        android:name="com.jjh.pokeapp2.views.home.team.TeamFragment"
         android:label="fragment_view_transaction"
-        tools:layout="@layout/fragment_equipo">
+        tools:layout="@layout/fragment_team">
+
+    </fragment>
+
+    <!-- SelectFragment -->
+    <fragment
+        android:id="@+id/selectFragment"
+        android:name="com.jjh.pokeapp2.views.home.select.SelectFragment"
+        android:label="fragment_view_transaction"
+        tools:layout="@layout/fragment_select">
+
+        <argument android:name="datos"
+            app:argType="com.jjh.pokeapp2.models.PokemonResponseModel"/>
 
     </fragment>
 </navigation>

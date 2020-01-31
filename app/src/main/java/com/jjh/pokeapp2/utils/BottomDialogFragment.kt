@@ -1,4 +1,4 @@
-package com.bancohipotecario.app.core.util
+package com.jjh.pokeapp2.utils
 
 import android.os.Bundle
 import android.view.LayoutInflater

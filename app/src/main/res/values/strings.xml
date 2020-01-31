@@ -34,4 +34,5 @@
     <string name="region">Región</string>
     <string name="equipos">Equipos</string>
     <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="agregar_pokemon">Agregar Pokémon</string>
 </resources>

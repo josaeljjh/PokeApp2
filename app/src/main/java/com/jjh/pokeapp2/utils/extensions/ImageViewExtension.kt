@@ -3,6 +3,7 @@ package com.jjh.pokeapp2.utils.extensions
 import android.annotation.SuppressLint
 import android.os.Build
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
@@ -51,6 +52,7 @@ fun ImageView.setBackgroundUrl(id: String) {
     }
 }
 
+@BindingAdapter("image")
 fun ImageView.setBackground(id: Int) {
     try {
         val options = RequestOptions()

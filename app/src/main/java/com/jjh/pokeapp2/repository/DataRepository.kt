@@ -1,10 +1,11 @@
-package com.jjh.pokeapp2.di.repository
+package com.jjh.pokeapp2.repository
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.itkacher.okhttpprofiler.OkHttpProfilerInterceptor
 import com.jjh.pokeapp2.BuildConfig
+import com.jjh.pokeapp2.utils.NetworkConnectionInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -17,10 +18,11 @@ class DataRepository {
 
      fun provideOkhttpClient(): OkHttpClient {
         try {
-            var loggingInterceptor = HttpLoggingInterceptor()
+            val loggingInterceptor = HttpLoggingInterceptor()
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-            var builder: OkHttpClient.Builder = OkHttpClient.Builder()
+            val builder: OkHttpClient.Builder = OkHttpClient.Builder()
             builder.addInterceptor(loggingInterceptor)
+            builder.addInterceptor(NetworkConnectionInterceptor())
             builder.connectTimeout(300,TimeUnit.SECONDS)
             builder.readTimeout(80,TimeUnit.SECONDS)
             builder.writeTimeout(90,TimeUnit.SECONDS)

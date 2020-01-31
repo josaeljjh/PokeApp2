@@ -4,8 +4,8 @@
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        app:constraintSetEnd="@layout/collapsing_equipo_end"
-        app:constraintSetStart="@layout/fragment_equipo"
+        app:constraintSetStart="@layout/fragment_team"
+        app:constraintSetEnd="@layout/collapsing_team_end"
         app:duration="500"
         motion:motionInterpolator="linear">
 
@@ -15,5 +15,4 @@
             app:touchAnchorSide="top" />
 
     </Transition>
-
 </MotionScene>

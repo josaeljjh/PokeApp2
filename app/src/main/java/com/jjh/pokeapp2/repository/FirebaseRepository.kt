@@ -1,4 +1,4 @@
-package com.jjh.pokeapp2.di.repository
+package com.jjh.pokeapp2.repository
 
 import com.google.firebase.auth.FirebaseAuth
 
